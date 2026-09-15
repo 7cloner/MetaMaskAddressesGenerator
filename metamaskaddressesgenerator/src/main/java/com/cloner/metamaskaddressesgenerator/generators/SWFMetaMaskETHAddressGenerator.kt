@@ -1,4 +1,4 @@
-package com.cloner.metamaskaddressesgenerator.models
+package com.cloner.metamaskaddressesgenerator.generators
 
 import org.web3j.crypto.Bip32ECKeyPair
 import org.web3j.crypto.Credentials

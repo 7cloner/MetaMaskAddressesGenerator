@@ -1,4 +1,4 @@
-package com.cloner.metamaskaddressesgenerator.models
+package com.cloner.metamaskaddressesgenerator.generators
 
 import org.bitcoinj.base.Base58
 import org.bitcoinj.crypto.MnemonicCode

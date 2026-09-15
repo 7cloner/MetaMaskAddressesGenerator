@@ -1,11 +1,12 @@
 package com.cloner.metamaskaddressesgenerator
 
 import com.cloner.metamaskaddressesgenerator.enums.SWFMetaMaskCoin
-import com.cloner.metamaskaddressesgenerator.models.SWFMetaMaskBNBAddressGenerator
-import com.cloner.metamaskaddressesgenerator.models.SWFMetaMaskBTCAddressGenerator
-import com.cloner.metamaskaddressesgenerator.models.SWFMetaMaskETHAddressGenerator
-import com.cloner.metamaskaddressesgenerator.models.SWFMetaMaskSOLAddressGenerator
-import com.cloner.metamaskaddressesgenerator.models.SWFMetaMaskTRXAddressGenerator
+import com.cloner.metamaskaddressesgenerator.generators.SWFMetaMaskBNBAddressGenerator
+import com.cloner.metamaskaddressesgenerator.generators.SWFMetaMaskBTCAddressGenerator
+import com.cloner.metamaskaddressesgenerator.generators.SWFMetaMaskETHAddressGenerator
+import com.cloner.metamaskaddressesgenerator.generators.SWFMetaMaskSOLAddressGenerator
+import com.cloner.metamaskaddressesgenerator.generators.SWFMetaMaskTRXAddressGenerator
+import com.cloner.metamaskaddressesgenerator.models.SWFAddress
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -17,8 +18,8 @@ object SWFMetaMaskAddressGenerator {
         mnemonic: String,
         passphrase: String,
         isTestNet: Boolean
-    ): Flow<String> = flow {
-        if(coins.isEmpty() || mnemonic.isEmpty()) return@flow
+    ): Flow<SWFAddress> = flow {
+        if (coins.isEmpty() || mnemonic.isEmpty()) return@flow
 
         coins.forEach { coin ->
             val address = generateAddress(
@@ -27,7 +28,7 @@ object SWFMetaMaskAddressGenerator {
                 passphrase = passphrase,
                 isTestNet = isTestNet
             )
-            if(address != null) emit(value = address)
+            if (address != null) emit(value = SWFAddress(address = address, coin = coin))
         }
     }
 

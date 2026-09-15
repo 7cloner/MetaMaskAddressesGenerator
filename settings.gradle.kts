@@ -22,6 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "MetaMaskAddressGenerator"
+rootProject.name = "SWFMetaMaskAddressGenerator"
 include(":app")
 include(":metamaskaddressesgenerator")
