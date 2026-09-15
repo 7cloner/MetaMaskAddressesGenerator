@@ -6,9 +6,30 @@ import com.cloner.metamaskaddressesgenerator.models.SWFMetaMaskBTCAddressGenerat
 import com.cloner.metamaskaddressesgenerator.models.SWFMetaMaskETHAddressGenerator
 import com.cloner.metamaskaddressesgenerator.models.SWFMetaMaskSOLAddressGenerator
 import com.cloner.metamaskaddressesgenerator.models.SWFMetaMaskTRXAddressGenerator
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 
 object SWFMetaMaskAddressGenerator {
 
+
+    fun generateAddresses(
+        coins: List<String>,
+        mnemonic: String,
+        passphrase: String,
+        isTestNet: Boolean
+    ): Flow<String> = flow {
+        if(coins.isEmpty() || mnemonic.isEmpty()) return@flow
+
+        coins.forEach { coin ->
+            val address = generateAddress(
+                coin = coin,
+                mnemonic = mnemonic,
+                passphrase = passphrase,
+                isTestNet = isTestNet
+            )
+            if(address != null) emit(value = address)
+        }
+    }
 
     fun generateAddress(
         coin: String,
